@@ -1,19 +1,17 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:webviewx/webviewx.dart';
-import 'package:whatshafiz/Components/MAppBar.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Models/ProfileModel.dart';
-import 'package:whatshafiz/Models/SettingsModel.dart';
-import 'package:whatshafiz/Models/WpSendCodeModel.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/authscreens/BaseWidget.dart';
-import 'package:whatshafiz/constants/Constants.dart';
-import 'package:whatshafiz/constants/Util.dart';
+
+import '../Components/MAppBar.dart';
+import '../Controllers/LoginController.dart';
+import '../Models/ProfileModel.dart';
+import '../Models/SettingsModel.dart';
+import '../Models/WpSendCodeModel.dart';
+import '../Services/ClientService.dart';
+import '../constants/Constants.dart';
+import '../constants/Util.dart';
+import 'BaseWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -243,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
       loginController?.SetToken = token;
       final clientService = ClientService();
       var responseSettings =
-          await clientService.getWithToken(SETTINGSURL, token!, {});
+          await clientService.getWithToken(SETTINGSURL, token, {});
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -253,8 +251,8 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
 
           print("==> resquesting to profile");
           final responseProfile =
-              await clientService.getWithToken(PROFILEURL, token!, {});
-          print("client response ${responseProfile}");
+              await clientService.getWithToken(PROFILEURL, token, {});
+          print("client response $responseProfile");
           if (responseProfile != null) {
             final profileResponse = ProfileModel.fromJson(responseProfile);
             if (profileResponse.user != null) {
@@ -265,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
                     "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
                     "WhatsApp Kody Gönder",
                     "Vazgeç",
-                    () => sendCodeAuth(token!));
+                    () => sendCodeAuth(token));
               } else {
                 //Get.toNamed(LANDING);
                 //loginController?.userModel.value.isSigned=true;
@@ -279,10 +277,10 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
   }
 
   sendCodeAuth(String token) async {
-    print("send code ${token}");
+    print("send code $token");
     var client = await ClientService().PostWithToken(WPCODESEND, token, {});
     if (client != null) {
-      print("send code ${client}");
+      print("send code $client");
       final wpMsg = WpSendCodeModel.fromJson(client);
       if (wpMsg.message != null) {
         if (wpMsg.message!.isNotEmpty) {

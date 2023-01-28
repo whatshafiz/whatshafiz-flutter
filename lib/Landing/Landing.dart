@@ -1,12 +1,11 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Components/MAppBar.dart';
-import 'package:whatshafiz/Components/SingleAppBar.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/authscreens/BaseWidget.dart';
-import 'package:whatshafiz/constants/Constants.dart';
+
+import '../Components/MAppBar.dart';
+import '../Controllers/LoginController.dart';
+import '../authscreens/BaseWidget.dart';
 
 class LandingScreen extends StatelessWidget with BaseWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -28,9 +27,9 @@ class LandingScreen extends StatelessWidget with BaseWidget {
         ),
         ElevatedButton(
             onPressed: () {
-              loginController?.signOut();
+              loginController.signOut();
             },
-            child: Text("Logout"))
+            child: const Text("Logout"))
       ]),
     );
   }

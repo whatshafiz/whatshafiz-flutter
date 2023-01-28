@@ -2,13 +2,13 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Models/Countries.dart';
-import 'package:whatshafiz/Models/Country.dart';
-import 'package:whatshafiz/Models/RegisterCheckModel.dart';
-import 'package:whatshafiz/Models/UserCheckModel.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/constants/Util.dart';
+import '../Controllers/AppTranslator.dart';
+import '../Models/Countries.dart';
+import '../Models/Country.dart';
+import '../Models/RegisterCheckModel.dart';
+import '../Models/UserCheckModel.dart';
+import '../Services/ClientService.dart';
+import '../constants/Util.dart';
 
 import '../constants/Constants.dart';
 
