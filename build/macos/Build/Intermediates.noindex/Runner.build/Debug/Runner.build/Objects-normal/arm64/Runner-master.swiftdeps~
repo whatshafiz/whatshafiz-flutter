@@ -1,0 +1,8 @@
+version: "Apple Swift version 5.7.2 (swiftlang-5.7.2.135.5 clang-1400.0.29.51)"
+options: "d5173b2ef4ec791170316b7caceb568855c94e374298cd2907b98bd7a5420fe0"
+build_start_time: [1673513600, 795928001]
+build_end_time: [1673513600, 897320032]
+inputs:
+  "/Users/yahyaizala/Desktop/Apps/whatshafiz/macos/Flutter/GeneratedPluginRegistrant.swift": !private [1673513489, 600048780]
+  "/Users/yahyaizala/Desktop/Apps/whatshafiz/macos/Runner/AppDelegate.swift": !private [1664357672, 0]
+  "/Users/yahyaizala/Desktop/Apps/whatshafiz/macos/Runner/MainFlutterWindow.swift": !private [1664357672, 0]
