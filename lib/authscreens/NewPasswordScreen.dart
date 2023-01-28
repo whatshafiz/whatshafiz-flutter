@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Components/SingleAppBar.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
+import '../Components/SingleAppBar.dart';
+import '../Services/ClientService.dart';
 
 import '../Models/Countries.dart';
 import '../Models/Country.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Services/SettingsRef.dart';
+import '../Controllers/LoginController.dart';
+import '../Services/SettingsRef.dart';
 
 class LogoutScreen extends StatelessWidget {
   const LogoutScreen({Key? key}) : super(key: key);

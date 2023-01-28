@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Models/CodeUpdateModel.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/constants/Util.dart';
+import '../Controllers/LoginController.dart';
+import '../Models/CodeUpdateModel.dart';
+import '../Services/ClientService.dart';
+import '../constants/Util.dart';
 
 import '../constants/Constants.dart';
 

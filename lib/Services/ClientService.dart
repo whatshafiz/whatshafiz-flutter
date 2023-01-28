@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:whatshafiz/Models/WhatsArapModel.dart';
-import 'package:whatshafiz/constants/Constants.dart';
+import '../Models/WhatsArapModel.dart';
+import '../constants/Constants.dart';
 
 class ClientService {
   ClientService();

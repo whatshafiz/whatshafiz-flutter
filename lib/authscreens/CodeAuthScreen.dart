@@ -3,10 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Components/SingleAppBar.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/constants/Constants.dart';
+import '../Components/SingleAppBar.dart';
+import '../Controllers/LoginController.dart';
+import '../Services/ClientService.dart';
+import '../constants/Constants.dart';
 
 import '../Models/WpSendCodeModel.dart';
 
@@ -65,14 +65,15 @@ class _CodeAuthScreenState extends State<CodeAuthScreen> {
     int minute = cnt ~/ 60;
     int sec = cnt % 60;
     String formatted = "";
-    if (minute < 10 && sec < 10)
+    if (minute < 10 && sec < 10) {
       formatted = "0$minute:0$sec";
-    else if (minute < 10)
+    } else if (minute < 10) {
       formatted = "0$minute:$sec";
-    else if (sec < 10)
+    } else if (sec < 10) {
       formatted = "$minute:0$sec";
-    else
+    } else {
       formatted = "$minute:$sec";
+    }
     return formatted;
   }
 
@@ -90,7 +91,7 @@ class _CodeAuthScreenState extends State<CodeAuthScreen> {
 
   validateField(String? txt) {
     if (txt == null) return null;
-    if (txt!.isEmpty) return "Kod girilmedi";
+    if (txt.isEmpty) return "Kod girilmedi";
     return null;
   }
 
@@ -125,7 +126,7 @@ class _CodeAuthScreenState extends State<CodeAuthScreen> {
         child: Container(
           width: size.width * 0.5,
           height: size.height * 0.5,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.circular(10),
@@ -204,9 +205,7 @@ class _CodeAuthScreenState extends State<CodeAuthScreen> {
   }
 
   void sendCode() async {
-    if (mToken != null) {
-      sendCodeAuth(mToken);
-    }
+    sendCodeAuth(mToken);
   }
 
   void codeValidTapped() async {

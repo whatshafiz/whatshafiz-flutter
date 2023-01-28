@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Auth/HomeView.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Landing/Landing.dart';
-import 'package:whatshafiz/Landing/Logout.dart';
-import 'package:whatshafiz/authscreens/CodeWithNewPassword.dart';
-import 'package:whatshafiz/authscreens/Home.dart';
-import 'package:whatshafiz/authscreens/NewPasswordScreen.dart';
-import 'package:whatshafiz/authscreens/RegisterScreen.dart';
-import 'package:whatshafiz/authscreens/RegisterWithPhoneScreen.dart';
-import 'package:whatshafiz/constants/Constants.dart';
+import 'Auth/HomeView.dart';
+import 'Controllers/AppTranslator.dart';
+import 'Controllers/LoginController.dart';
+import 'Landing/Landing.dart';
+import 'Landing/Logout.dart';
+import 'authscreens/CodeWithNewPassword.dart';
+import 'authscreens/Home.dart';
+import 'authscreens/NewPasswordScreen.dart';
+import 'authscreens/RegisterScreen.dart';
+import 'authscreens/RegisterWithPhoneScreen.dart';
+import 'constants/Constants.dart';
 
 import 'authscreens/CodeAuthScreen.dart';
 

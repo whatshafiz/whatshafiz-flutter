@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/constants/Constants.dart';
+import '../constants/Constants.dart';
 import '../Utils/MenuItems.dart';
 import '../Utils/TapPages.dart';
 import '../Utils/WindowType.dart';

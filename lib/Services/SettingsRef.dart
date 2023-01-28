@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Models/UserModel.dart';
+import '../Controllers/LoginController.dart';
+import '../Models/UserModel.dart';
 
 class SettingsRef {
   String USEREMAIL = "USEREMAIL";

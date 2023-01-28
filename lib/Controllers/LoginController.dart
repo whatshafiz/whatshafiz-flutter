@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
-import 'package:whatshafiz/Models/LoginModel.dart';
-import 'package:whatshafiz/Models/UserModel.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/Services/SettingsRef.dart';
+import '../Models/LoginModel.dart';
+import '../Models/UserModel.dart';
+import '../Services/ClientService.dart';
+import '../Services/SettingsRef.dart';
 
 class LoginController extends GetxController {
   //Rx<UserModel> userModel = UserModel().obs;

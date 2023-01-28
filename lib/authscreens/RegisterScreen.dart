@@ -1,14 +1,12 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Components/MAppBar.dart';
-import 'package:whatshafiz/Models/WhatsArapModel.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/authscreens/BaseWidget.dart';
-import 'package:whatshafiz/constants/Constants.dart';
-import 'package:whatshafiz/constants/Util.dart';
+import '../Components/MAppBar.dart';
+import '../Models/WhatsArapModel.dart';
+import '../Services/ClientService.dart';
+import 'BaseWidget.dart';
+import '../constants/Constants.dart';
+import '../constants/Util.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -27,7 +25,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
     final responseModelHafizKal = WhatsArapModel.fromJson(responseHafizKal);
     final responseModelHafizOl = WhatsArapModel.fromJson(responseHafizOl);
     setState(() {
-      print("setting ${hafizKal}");
+      print("setting $hafizKal");
       hafizKal = responseModelHafizKal.text;
       hafizOl = responseModelHafizOl.text;
     });
@@ -110,7 +108,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
                               .copyWith(fontSize: 10, color: Colors.white),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
                         margin: const EdgeInsets.only(top: 30),
                         decoration: BoxDecoration(
@@ -134,7 +132,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),
@@ -198,7 +196,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
                               .copyWith(fontSize: 10, color: Colors.white),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       Container(
                         margin: const EdgeInsets.only(top: 30),
                         decoration: BoxDecoration(
@@ -222,7 +220,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                     ],
                   ),
                 ),

@@ -1,22 +1,20 @@
-import 'dart:math';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Models/ProfileModel.dart';
-import 'package:whatshafiz/Models/SettingsModel.dart';
-import 'package:whatshafiz/Models/WpSendCodeModel.dart';
-import 'package:whatshafiz/Services/ClientService.dart';
-import 'package:whatshafiz/authscreens/Home.dart';
-import 'package:whatshafiz/constants/Constants.dart';
-import 'package:whatshafiz/constants/Util.dart';
 
+import '../Controllers/LoginController.dart';
 import '../Models/Countries.dart';
 import '../Models/Country.dart';
+import '../Models/ProfileModel.dart';
 import '../Models/RegisterCheckModel.dart';
+import '../Models/SettingsModel.dart';
 import '../Models/UserCheckModel.dart';
+import '../Models/WpSendCodeModel.dart';
+import '../Services/ClientService.dart';
+import '../authscreens/Home.dart';
+import '../constants/Constants.dart';
+import '../constants/Util.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -89,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
                   });
                 }
               },
-              child: Icon(Icons.arrow_back)),
+              child: const Icon(Icons.arrow_back)),
         ),
       ),
       body: Center(
@@ -345,7 +343,7 @@ class _HomeViewState extends State<HomeView> {
     if (token != null) {
       final clientService = ClientService();
       var responseSettings =
-          await clientService.getWithToken(SETTINGSURL, token!, EmptyMap);
+          await clientService.getWithToken(SETTINGSURL, token, EmptyMap);
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -367,7 +365,7 @@ class _HomeViewState extends State<HomeView> {
     var clientService = ClientService();
     final responseProfile =
         await clientService.getWithToken(PROFILEURL, token, {});
-    print("client response profile  ${responseProfile}");
+    print("client response profile  $responseProfile");
     if (responseProfile != null) {
       final profileResponse = ProfileModel.fromJson(responseProfile);
       if (profileResponse.user != null) {
@@ -378,7 +376,7 @@ class _HomeViewState extends State<HomeView> {
               "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
               "WhatsApp Kody Gönder",
               "Vazgeç",
-              () => sendCodeAuth(token!));
+              () => sendCodeAuth(token));
         } else {
           //Get.toNamed(LANDING);
           //loginController?.userModel.value.isSigned=true;
@@ -390,7 +388,7 @@ class _HomeViewState extends State<HomeView> {
 
   void setPasswordForMe() async {
     final psw = pswText.text;
-    if (psw.length > 0) {
+    if (psw.isNotEmpty) {
       var map = {
         "phone_number": currentPhoneNum,
         "password": psw,
@@ -402,7 +400,7 @@ class _HomeViewState extends State<HomeView> {
 
       if (responseModel.token != null) {
         LoginController.Shared.SetToken = responseModel.token!;
-        print(responseModel?.token);
+        print(responseModel.token);
       }
     }
   }
@@ -428,7 +426,7 @@ class _HomeViewState extends State<HomeView> {
           await informUser(context, "", "baninform".tr);
         } else if (responseModel.isRegistered!) {
           print("is registeed");
-          final tmpToken = "158|2fN1fBCNlkRkd7SP9HGcD7t39oyF0eOmJqqqMYiP";
+          const tmpToken = "158|2fN1fBCNlkRkd7SP9HGcD7t39oyF0eOmJqqqMYiP";
           checkSettings(tmpToken, context);
         } else {
           setState(() {
@@ -458,7 +456,7 @@ class _HomeViewState extends State<HomeView> {
     if (token != null) {
       final clientService = ClientService();
       var responseSettings =
-          await clientService.getWithToken(SETTINGSURL, token!, {});
+          await clientService.getWithToken(SETTINGSURL, token, {});
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -472,7 +470,7 @@ class _HomeViewState extends State<HomeView> {
                 "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
                 "WhatsApp Kodu Gönder",
                 "Vazgeç",
-                () => sendCodeAuth(token!));
+                () => sendCodeAuth(token));
           } else {
             loginController?.SetToken = token; //login tamamdır
           }
@@ -510,7 +508,7 @@ class _HomeViewState extends State<HomeView> {
       print("register response $loginController");
       if (loginResponse.token != null) {
         if (loginResponse.token!.isNotEmpty) {
-          settingCheck(loginResponse!.token, context);
+          settingCheck(loginResponse.token, context);
         }
       }
     }
@@ -521,12 +519,12 @@ class _HomeViewState extends State<HomeView> {
     var client =
         await ClientService().PostMeApplicationJSon(FORGETPASSWORDURL, map);
     if (client != null) {
-      print("client response ${client}");
+      print("client response $client");
       final wpMsg = WpSendCodeModel.fromJson(client);
       if (wpMsg.message != null) {
         if (wpMsg.message!.isNotEmpty) {
           if (wpMsg.message! == "Telefon No daha önce doğrulanmış") {
-            informUser(context, "", "${wpMsg.message!}");
+            informUser(context, "", wpMsg.message!);
           } else {
             Get.toNamed(CODEANDPSW, arguments: {"token": phoneNum});
           }
