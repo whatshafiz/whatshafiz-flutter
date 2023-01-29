@@ -3,13 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:whatshafiz/Auth/HomeController.dart';
-
+import 'package:whatshafiz/Controllers/AppTranslator.dart';
 import '../Models/Countries.dart';
-import '../Models/ProfileModel.dart';
-import '../Services/ClientService.dart';
 import '../authscreens/Home.dart';
 import '../constants/Constants.dart';
-import '../constants/Util.dart';
 
 class HomeView extends GetWidget<HomeController> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -73,12 +70,11 @@ class HomeView extends GetWidget<HomeController> {
                               items: controller.counties,
                               itemAsString: (item) =>
                                   "(+${item.phoneCode}) ${item.name}",
-                              dropdownDecoratorProps:
-                                  const DropDownDecoratorProps(
+                              dropdownDecoratorProps: DropDownDecoratorProps(
                                 dropdownSearchDecoration: InputDecoration(
-                                  labelText: "Ülke Kodu",
+                                  labelText: TranslationKeys.ulkekodu.tr,
                                   hintText:
-                                      "Ülkenize ait telefon kodunu seçiniz...",
+                                      TranslationKeys.telefonkoduseciniz.tr,
                                 ),
                               ),
                               onChanged: (item) {
@@ -97,7 +93,8 @@ class HomeView extends GetWidget<HomeController> {
                                 validator: (txt) {
                                   if (txt == null) return null;
                                   if (txt.length < 4)
-                                    return "Telefon numarası hatalı veya eksik";
+                                    return TranslationKeys
+                                        .telefonnohataliveyaeksik.tr;
                                   return null;
                                 },
                                 onSaved: (txt) {
@@ -106,10 +103,11 @@ class HomeView extends GetWidget<HomeController> {
                                   }
                                 },
                                 keyboardType: TextInputType.phone,
-                                decoration: const InputDecoration(
-                                  labelText: "Telefon numaranızı giriniz.",
-                                  hintText:
-                                      "Telefon numarası alan kodu olmadan giriniz.",
+                                decoration: InputDecoration(
+                                  labelText:
+                                      TranslationKeys.telefonnumarasigiriniz.tr,
+                                  hintText: TranslationKeys
+                                      .telefonnoalankoduolmadangiriniz.tr,
                                   labelStyle: TextStyle(color: Colors.white),
                                 ),
                                 style: TextStyle(
@@ -135,9 +133,11 @@ class HomeView extends GetWidget<HomeController> {
                                           },
                                           obscureText: true,
                                           keyboardType: TextInputType.phone,
-                                          decoration: const InputDecoration(
-                                            labelText: "Parola giriniz.",
-                                            hintText: "Bir parola giriniz.",
+                                          decoration: InputDecoration(
+                                            labelText: TranslationKeys
+                                                .parolagiriniz.tr,
+                                            hintText: TranslationKeys
+                                                .parolagiriniz.tr,
                                             labelStyle:
                                                 TextStyle(color: Colors.white),
                                           ),
@@ -158,7 +158,8 @@ class HomeView extends GetWidget<HomeController> {
                                                   onPressed: () =>
                                                       controller.wpMsgSend(),
                                                   child: Text(
-                                                    "Şifremi Unuttum",
+                                                    TranslationKeys
+                                                        .sifremiunuttum.tr,
                                                     style: TextStyle(
                                                         fontSize: 12,
                                                         color: Colors.blue,
@@ -168,7 +169,8 @@ class HomeView extends GetWidget<HomeController> {
                                                   ),
                                                 )
                                               : Text(
-                                                  "Şifremi unuttum hizmeti kısa süre için kapalıdır.",
+                                                  TranslationKeys
+                                                      .sifremiunuttumkapali,
                                                   style: GoogleFonts.poppins()
                                                       .copyWith(
                                                           fontSize: 12,
@@ -193,9 +195,11 @@ class HomeView extends GetWidget<HomeController> {
                                           },
                                           obscureText: true,
                                           keyboardType: TextInputType.phone,
-                                          decoration: const InputDecoration(
-                                            labelText: "Parola giriniz.",
-                                            hintText: "Bir parola giriniz.",
+                                          decoration: InputDecoration(
+                                            labelText: TranslationKeys
+                                                .parolagiriniz.tr,
+                                            hintText: TranslationKeys
+                                                .parolagiriniz.tr,
                                             labelStyle:
                                                 TextStyle(color: Colors.white),
                                           ),
@@ -212,16 +216,16 @@ class HomeView extends GetWidget<HomeController> {
                                         child: TextFormField(
                                           validator: (t) => validatePsw(t),
                                           onSaved: (t) {
-                                            print("paswword confirm");
                                             controller.passwordConfirmation =
                                                 t!;
                                           },
                                           obscureText: true,
                                           keyboardType: TextInputType.phone,
-                                          decoration: const InputDecoration(
-                                            labelText:
-                                                "Parola tekrarı giriniz.",
-                                            hintText: "Parola tekrarı giriniz.",
+                                          decoration: InputDecoration(
+                                            labelText: TranslationKeys
+                                                .parolagiriniztekrari.tr,
+                                            hintText: TranslationKeys
+                                                .parolagiriniztekrari.tr,
                                             labelStyle:
                                                 TextStyle(color: Colors.white),
                                           ),
@@ -242,7 +246,8 @@ class HomeView extends GetWidget<HomeController> {
                                                   onPressed: () =>
                                                       controller.wpMsgSend(),
                                                   child: Text(
-                                                    "Şifremi Unuttum",
+                                                    TranslationKeys
+                                                        .sifremiunuttum.tr,
                                                     style: TextStyle(
                                                         fontSize: 12,
                                                         color: Colors.blue,
@@ -255,7 +260,8 @@ class HomeView extends GetWidget<HomeController> {
                                                   visible:
                                                       !controller.firstLogin,
                                                   child: Text(
-                                                    "Şifremi unuttum hizmeti kısa süre için kapalıdır.",
+                                                    TranslationKeys
+                                                        .sifremiunuttumkapali,
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                             fontSize: 12,
@@ -296,8 +302,8 @@ class HomeView extends GetWidget<HomeController> {
                                 },
                                 child: Text(
                                   !controller.showPasswordFields
-                                      ? "İleri"
-                                      : "Giriş Yap",
+                                      ? TranslationKeys.ileri.tr
+                                      : TranslationKeys.girisyap,
                                   style: GoogleFonts.poppins().copyWith(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,
@@ -317,35 +323,6 @@ class HomeView extends GetWidget<HomeController> {
         ),
       ),
     );
-  }
-
-  validatePhone(String? text) {
-    if (text == null) return null;
-    if (text.length < 6 && text.isNotEmpty) return "Telefon boş veya geçersiz!";
-    return null;
-  }
-
-  getProfile(String token) async {
-    var clientService = ClientService();
-    final responseProfile =
-        await clientService.getWithToken(PROFILEURL, token, {});
-    if (responseProfile != null) {
-      final profileResponse = ProfileModel.fromJson(responseProfile);
-      if (profileResponse.user != null) {
-        if (profileResponse.user!.phoneNumberVerifiedAt == null) {
-          await yesNoDialog(
-              Get.context as BuildContext,
-              "",
-              "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
-              "WhatsApp Kody Gönder",
-              "Vazgeç",
-              () => controller.sendCodeAuth(token));
-        } else {
-          //Get.toNamed(LANDING);
-          //loginController?.userModel.value.isSigned=true;
-        }
-      }
-    }
   }
 }
 /*

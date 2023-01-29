@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/Landing/Landing.dart';
+import 'package:whatshafiz/Controllers/AppTranslator.dart';
 import '../Controllers/LoginController.dart';
 import '../Helper/AppRoutes.dart';
 import '../Models/Countries.dart';
@@ -24,9 +24,11 @@ class HomeController extends GetxController {
   String passwordConfirmation = "";
   String firstLoginPswText = "";
   String userToken = "";
+  ClientService client = ClientService();
 
   List<Countries> counties = [
-    Countries(id: 0, iso: "iseo", name: "Seçiniz", phoneCode: "...")
+    Countries(
+        id: 0, iso: "iseo", name: TranslationKeys.seciniz.tr, phoneCode: "...")
   ];
 
   @override
@@ -36,13 +38,13 @@ class HomeController extends GetxController {
     getCountryCodes();
   }
 
-  resetForm(){
-    showPasswordFields=false;
+  resetForm() {
+    showPasswordFields = false;
     update();
   }
 
   getCountryCodes() async {
-    var result = await ClientService().GetMe(COUNTRYCODEURL, EmptyMap);
+    var result = await client.GetMe(COUNTRYCODEURL, EmptyMap);
     var countryWithCodes = Country.fromJson(result);
 
     if (countryWithCodes.countries != null) {
@@ -54,10 +56,10 @@ class HomeController extends GetxController {
   }
 
   void registerToApp() async {
-    print("register to app is working $password $passwordConfirmation");
     if (password.isEmpty) return;
     if (password != passwordConfirmation && password.isNotEmpty) {
-      informUser(Get.context as BuildContext, "", "Parolalar uyuşmamaktadır");
+      informUser(
+          Get.context as BuildContext, "", TranslationKeys.parolauyusmuyor.tr);
       return;
     }
 
@@ -67,7 +69,6 @@ class HomeController extends GetxController {
       "password_confirmation": passwordConfirmation
     };
 
-    final client = ClientService();
     var res = await client.PostMeApplicationJSon(REGISTERURL, val);
     var loginResponse = RegisterCheckModel.fromJson(res);
     if (loginResponse.token != null) {
@@ -79,9 +80,7 @@ class HomeController extends GetxController {
 
   void settingCheck(String? token) async {
     if (token != null) {
-      final clientService = ClientService();
-      var responseSettings =
-          await clientService.getWithToken(SETTINGSURL, token, {});
+      var responseSettings = await client.getWithToken(SETTINGSURL, token, {});
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -92,9 +91,9 @@ class HomeController extends GetxController {
             await yesNoDialog(
                 Get.context as BuildContext,
                 "",
-                "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
-                "WhatsApp Kodu Gönder",
-                "Vazgeç",
+                TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek.tr,
+                TranslationKeys.wpkodugonder.tr,
+                TranslationKeys.vazgec.tr,
                 () => sendCodeAuth(token));
           } else {
             //loginController?.SetToken = token; //login tamamdır
@@ -105,9 +104,9 @@ class HomeController extends GetxController {
   }
 
   sendCodeAuth(String token) async {
-    var client = await ClientService().PostWithToken(WPCODESEND, token, {});
-    if (client != null) {
-      final wpMsg = WpSendCodeModel.fromJson(client);
+    var _client = await client.PostWithToken(WPCODESEND, token, {});
+    if (_client != null) {
+      final wpMsg = WpSendCodeModel.fromJson(_client);
       if (wpMsg.message != null) {
         if (wpMsg.message!.isNotEmpty) {
           Get.toNamed(AppRoutes.CODEAUTH, arguments: {"token": token});
@@ -123,11 +122,8 @@ class HomeController extends GetxController {
       if (code.isNotEmpty && phoneNum!.isNotEmpty) {
         final num = "$code$phoneNum";
         currentPhoneNum = num;
-
         final map = {"phone_number": num};
-
-        final check =
-            await ClientService().PostMeApplicationJSon(CHECKURL, map);
+        final check = await client.PostMeApplicationJSon(CHECKURL, map);
         final responseModel = UserCheckModel.fromJson(check);
         print("===> ${responseModel.isBanned} ${responseModel.isRegistered}");
         if (responseModel.isBanned!) {
@@ -152,17 +148,16 @@ class HomeController extends GetxController {
     await yesNoDialog(
         Get.context as BuildContext,
         "",
-        "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
-        "WhatsApp Kodu Gönder",
-        "Vazgeç",
+        TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek.tr,
+        TranslationKeys.wpkodugonder.tr,
+        TranslationKeys.vazgec.tr,
         () => sendCodeAndGotoNewPsw(num));
   }
 
   void checkSettings(String? token) async {
     if (token != null) {
-      final clientService = ClientService();
       var responseSettings =
-          await clientService.getWithToken(SETTINGSURL, token, EmptyMap);
+          await client.getWithToken(SETTINGSURL, token, EmptyMap);
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -183,15 +178,15 @@ class HomeController extends GetxController {
 
   sendCodeAndGotoNewPsw(String phoneNum) async {
     var map = {"phone_number": phoneNum};
-
-    var client =
-        await ClientService().PostMeApplicationJSon(FORGETPASSWORDURL, map);
-    if (client != null) {
-      final wpMsg = WpSendCodeModel.fromJson(client);
+    var _client = await client.PostMeApplicationJSon(FORGETPASSWORDURL, map);
+    if (_client != null) {
+      final wpMsg = WpSendCodeModel.fromJson(_client);
       if (wpMsg.message != null) {
         if (wpMsg.message!.isNotEmpty) {
           if (wpMsg.message! == "Telefon No daha önce doğrulanmış") {
-            informUser(Get.context as BuildContext, "", wpMsg.message!);
+            //informUser(Get.context as BuildContext, "", wpMsg.message!);
+            informUser(Get.context as BuildContext, "",
+                TranslationKeys.wpkodudahaoncedogrulanmis.tr);
           } else {
             Get.toNamed(AppRoutes.CODEANDPSW, arguments: {"token": phoneNum});
           }
@@ -206,17 +201,12 @@ class HomeController extends GetxController {
         "phone_number": currentPhoneNum,
         "password": password,
       };
-      print("login $map");
-      final response =
-          await ClientService().PostMeApplicationJSon(LOGINURL, map);
+      final response = await client.PostMeApplicationJSon(LOGINURL, map);
       final responseModel = RegisterCheckModel.fromJson(response);
 
-      print("==> ${responseModel.token}");
       if (responseModel.token != null) {
         userToken = responseModel.token!;
-        //Get.offAll(LandingScreen());
         LoginController.Shared.SetToken = responseModel.token!;
-        // print(responseModel.token);
       }
     }
   }

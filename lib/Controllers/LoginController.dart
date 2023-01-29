@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/state_manager.dart';
+import '../Constants/Constants.dart';
 import '../Models/LoginModel.dart';
 import '../Models/UserModel.dart';
 import '../Services/ClientService.dart';
@@ -22,7 +23,6 @@ class LoginController extends GetxController {
       val?.token = value;
       val?.isSigned = true;
     });
-
   }
 
   set LoggedInd(bool sign) {
@@ -57,6 +57,29 @@ class LoginController extends GetxController {
       val?.isSigned = false;
     });
   }
+
+  /*getProfile(String token) async {
+    var clientService = ClientService();
+    final responseProfile =
+    await clientService.getWithToken(PROFILEURL, token, {});
+    if (responseProfile != null) {
+      final profileResponse = ProfileModel.fromJson(responseProfile);
+      if (profileResponse.user != null) {
+        if (profileResponse.user!.phoneNumberVerifiedAt == null) {
+          await yesNoDialog(
+              Get.context as BuildContext,
+              "",
+              "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
+              "WhatsApp Kody Gönder",
+              "Vazgeç",
+                  () => controller.sendCodeAuth(token));
+        } else {
+          //Get.toNamed(LANDING);
+          //loginController?.userModel.value.isSigned=true;
+        }
+      }
+    }
+  }*/
 
   Future<void> readAll() async {
     var settings = await SettingsRef().getUserProps();
