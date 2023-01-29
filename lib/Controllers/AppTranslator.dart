@@ -34,14 +34,14 @@ class AppTranslator extends Translations {
         "en_US": {
           TranslationKeys.youalreadyregistered:
               "You already registerd! Please sign in.",
-          TranslationKeys.ulkekodu: "Ülke Kodu",
-          TranslationKeys.vazgec: "Vazgeç",
-          TranslationKeys.wpkodugonder: "WhatsApp Kodu Gönder",
-          TranslationKeys.ileri: "İleri",
-          TranslationKeys.telefonnumarasigiriniz: "Telefon numaranızı giriniz.",
+          TranslationKeys.ulkekodu: "Nation Code",
+          TranslationKeys.vazgec: "Cancel",
+          TranslationKeys.wpkodugonder: "Send me whatsapp code",
+          TranslationKeys.ileri: "Forward",
+          TranslationKeys.telefonnumarasigiriniz: "Enter your phone number",
           TranslationKeys.wpkodudahaoncedogrulanmis:
-              "Telefon No daha önce doğrulanmış",
-          TranslationKeys.seciniz: "Seçiniz",
+              "This phone number already validated",
+          TranslationKeys.seciniz: "Choose",
           TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek:
               "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
           TranslationKeys.telefonnohataliveyaeksik:
@@ -86,7 +86,7 @@ class AppTranslator extends Translations {
               "Telefon numarası alan kodu olmadan giriniz.",
           TranslationKeys.youalreadyregistered:
               "Zaten üyesinizi! Lütfen giriş yapınız.",
-          TranslationKeys.ulkekodu: "Nation Code",
+          TranslationKeys.ulkekodu: "Ülke Kodu",
           TranslationKeys.telefonkoduseciniz: "Telefon numaranızı giriniz.",
           TranslationKeys.telefonnohataliveyaeksik:
               "Telefon numarası hatalı veya eksik",
