@@ -66,6 +66,7 @@ class AppTranslator extends Translations {
         "tr_TR": {
           TranslationKeys.parolagiriniz: "Parola giriniz.",
           TranslationKeys.seciniz: "Seçiniz",
+          TranslationKeys.sifremiunuttum: "Şifremi Unuttum",
           TranslationKeys.telefonnumarasigiriniz: "Telefon numaranızı giriniz",
           TranslationKeys.wpkodugonder: "WhatsApp Kodu Gönder",
           TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek:

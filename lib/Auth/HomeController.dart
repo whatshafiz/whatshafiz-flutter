@@ -94,7 +94,7 @@ class HomeController extends GetxController {
                 TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek.tr,
                 TranslationKeys.wpkodugonder.tr,
                 TranslationKeys.vazgec.tr,
-                () => sendCodeAuth(token));
+                    () => sendCodeAuth(token));
           } else {
             //loginController?.SetToken = token; //login tamamdır
           }
@@ -151,13 +151,16 @@ class HomeController extends GetxController {
         TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek.tr,
         TranslationKeys.wpkodugonder.tr,
         TranslationKeys.vazgec.tr,
-        () => sendCodeAndGotoNewPsw(num));
+            () {
+          Navigator.of(Get.context as BuildContext).pop();
+          sendCodeAndGotoNewPsw(num);
+        });
   }
 
   void checkSettings(String? token) async {
     if (token != null) {
       var responseSettings =
-          await client.getWithToken(SETTINGSURL, token, EmptyMap);
+      await client.getWithToken(SETTINGSURL, token, EmptyMap);
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -188,7 +191,9 @@ class HomeController extends GetxController {
             informUser(Get.context as BuildContext, "",
                 TranslationKeys.wpkodudahaoncedogrulanmis.tr);
           } else {
+            showPasswordFields = false;
             Get.toNamed(AppRoutes.CODEANDPSW, arguments: {"token": phoneNum});
+            update();
           }
         }
       }
@@ -206,6 +211,7 @@ class HomeController extends GetxController {
 
       if (responseModel.token != null) {
         userToken = responseModel.token!;
+        showPasswordFields=false;
         LoginController.Shared.SetToken = responseModel.token!;
       }
     }

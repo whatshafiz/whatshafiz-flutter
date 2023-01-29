@@ -48,7 +48,7 @@ class HomeView extends GetWidget<HomeController> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Container(
-                    width: size.width * 0.5,
+                    width: size.width * 0.7,
                     margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
                     decoration: BoxDecoration(
                       color: Colors.black87,
@@ -170,7 +170,7 @@ class HomeView extends GetWidget<HomeController> {
                                                 )
                                               : Text(
                                                   TranslationKeys
-                                                      .sifremiunuttumkapali,
+                                                      .sifremiunuttumkapali.tr,
                                                   style: GoogleFonts.poppins()
                                                       .copyWith(
                                                           fontSize: 12,
@@ -261,7 +261,7 @@ class HomeView extends GetWidget<HomeController> {
                                                       !controller.firstLogin,
                                                   child: Text(
                                                     TranslationKeys
-                                                        .sifremiunuttumkapali,
+                                                        .sifremiunuttumkapali.tr,
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                             fontSize: 12,
@@ -303,7 +303,7 @@ class HomeView extends GetWidget<HomeController> {
                                 child: Text(
                                   !controller.showPasswordFields
                                       ? TranslationKeys.ileri.tr
-                                      : TranslationKeys.girisyap,
+                                      : TranslationKeys.girisyap.tr,
                                   style: GoogleFonts.poppins().copyWith(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16,

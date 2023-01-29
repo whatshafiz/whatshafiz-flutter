@@ -54,7 +54,13 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
             .PostMeApplicationJSonWithAccept(UPDATEPASSWORDRUL, map);
         if (response != null) {
           final codeModel = CodeUpdateModel.fromJson(response);
+          print("===> ${response}");
           if (codeModel.errors == null) {
+            if (codeModel.message ==
+                "Kod hatalı veya süresi dolmuş, lütfen tekrar deneyin.") {
+              informUser(context, "", codeModel.message!);
+              return;
+            }
             askUser(context, "",
                 "Başarıyla şifreniz değiştirildi. Şimdi Girişe yönlendiriliyorsunuz.",
                 () {
@@ -91,7 +97,7 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
           color: Colors.black,
           alignment: Alignment.center,
           child: Container(
-            width: size.width * 0.5,
+            width: size.width * 0.7,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(color: Colors.white, width: 1)),
@@ -100,7 +106,7 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Container(
-                  margin: EdgeInsets.only(top: 20),
+                  margin: EdgeInsets.only(top: 20, left: 10, right: 10),
                   child: Text(
                     "Lütfen gelen mesajı spam değil olarak işaretleyiniz.",
                     style: GoogleFonts.poppins()
@@ -137,13 +143,14 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
                 ),
                 Container(
                   alignment: Alignment.topRight,
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
+                  margin:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                   child: ElevatedButton(
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.green),
                     onPressed: registerToApp,
                     child: Text(
-                      "Kaydol",
+                      "Şifre Değiştir",
                       style: GoogleFonts.poppins()
                           .copyWith(color: Colors.white, fontSize: 15),
                     ),
