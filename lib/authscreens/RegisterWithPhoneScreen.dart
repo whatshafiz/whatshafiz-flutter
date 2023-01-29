@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Controllers/AppTranslator.dart';
+import '../Helper/AppRoutes.dart';
 import '../Models/Countries.dart';
 import '../Models/Country.dart';
 import '../Models/RegisterCheckModel.dart';
@@ -242,7 +243,7 @@ class _RegisterWithPhoneScreenState extends State<RegisterWithPhoneScreen> {
           await informUser(context, "", "baninform".tr);
         } else if (responseModel.isRegistered!) {
           await informUser(context, "", "youalreadyregistered".tr);
-          Get.toNamed(LOGIN);
+          Get.toNamed(AppRoutes.LOGIN);
         } else {
           setState(() {
             showPasswordFields = true;
@@ -252,6 +253,4 @@ class _RegisterWithPhoneScreenState extends State<RegisterWithPhoneScreen> {
       }
     }
   }
-
-
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Controllers/LoginController.dart';
+import '../Helper/AppRoutes.dart';
 import '../Models/CodeUpdateModel.dart';
 import '../Services/ClientService.dart';
 import '../constants/Util.dart';
@@ -57,7 +58,7 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
             askUser(context, "",
                 "Başarıyla şifreniz değiştirildi. Şimdi Girişe yönlendiriliyorsunuz.",
                 () {
-              Get.toNamed(HOME);
+              Get.toNamed(AppRoutes.HOME);
             });
           } else {
             informUser(context, "", codeModel.message!);

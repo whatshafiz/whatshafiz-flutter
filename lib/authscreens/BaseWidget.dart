@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import '../Helper/AppRoutes.dart';
 import '../constants/Constants.dart';
 import '../Utils/MenuItems.dart';
 import '../Utils/TapPages.dart';
@@ -10,11 +11,11 @@ class BaseWidget {
   getWhatsArapModel() async {}
 
   getRegister() async {
-    Get.toNamed(REGISTER);
+    Get.toNamed(AppRoutes.REGISTER);
   }
 
   getLogin() async {
-    Get.toNamed(LOGIN);
+    Get.toNamed(AppRoutes.LOGIN);
   }
 
   getSss() async {}

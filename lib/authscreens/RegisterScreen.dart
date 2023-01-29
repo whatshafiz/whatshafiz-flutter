@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../Components/MAppBar.dart';
+import '../Helper/AppRoutes.dart';
 import '../Models/WhatsArapModel.dart';
 import '../Services/ClientService.dart';
 import 'BaseWidget.dart';
@@ -119,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
                                 const BorderRadius.all(Radius.circular(10))),
                         child: TextButton(
                           onPressed: () {
-                            Get.toNamed(PHONEREGISTER,
+                            Get.toNamed(AppRoutes.PHONEREGISTER,
                                 arguments: {"title": "Hafız Kal"});
                           },
                           child: Padding(
@@ -207,7 +208,7 @@ class _RegisterScreenState extends State<RegisterScreen> with BaseWidget {
                                 const BorderRadius.all(Radius.circular(10))),
                         child: TextButton(
                           onPressed: () {
-                            Get.toNamed(PHONEREGISTER,
+                            Get.toNamed(AppRoutes.PHONEREGISTER,
                                 arguments: {"title": "Hafız Ol"});
                           },
                           child: Padding(

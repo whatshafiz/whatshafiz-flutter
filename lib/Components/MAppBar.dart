@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../Helper/AppRoutes.dart';
 import '../Services/ClientService.dart';
 import '../Utils/MenuItems.dart';
 import '../Utils/TapPages.dart';
@@ -50,7 +51,7 @@ class _MAppBarState extends State<MAppBar> {
         child: Center(
           child: InkWell(
             onTap: () {
-              Get.toNamed(HOME);
+              Get.toNamed(AppRoutes.HOME);
             },
             child: Text(
               "WhatsHafız .",

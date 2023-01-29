@@ -1,16 +1,11 @@
 import 'package:flutter/cupertino.dart';
 
+
 Size getWindowSize(BuildContext context) => MediaQuery.of(context).size;
 
-const LOGOUT = "/logout";
-const HOME = "/";
-const LANDING = "/landing";
-const LOGIN = "/login";
-const REGISTER = "/register";
-const PHONEREGISTER = "/phone";
-const CODEAUTH = "/codeauth";
-const FORGETPSW = "/forgetpsw";
-const CODEANDPSW = "/codeandpsw";
+
+
+
 
 const ENDPOINT = "https://api.whatshafiz.com/api/v1/";
 const HAFIZKALURL = "regulations/hafizkal";

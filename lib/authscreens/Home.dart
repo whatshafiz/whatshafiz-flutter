@@ -5,6 +5,7 @@ import 'package:webviewx/webviewx.dart';
 
 import '../Components/MAppBar.dart';
 import '../Controllers/LoginController.dart';
+import '../Helper/AppRoutes.dart';
 import '../Models/ProfileModel.dart';
 import '../Models/SettingsModel.dart';
 import '../Models/WpSendCodeModel.dart';
@@ -148,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
                             alignment: Alignment.topRight,
                             child: TextButton(
                               onPressed: () {
-                                Get.toNamed(FORGETPSW);
+                                Get.toNamed(AppRoutes.FORGETPSW);
                               },
                               child: Text(
                                 "Şifremi Unuttum",
@@ -284,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
       final wpMsg = WpSendCodeModel.fromJson(client);
       if (wpMsg.message != null) {
         if (wpMsg.message!.isNotEmpty) {
-          Get.toNamed(CODEAUTH);
+          Get.toNamed(AppRoutes.CODEAUTH);
         }
       }
     }

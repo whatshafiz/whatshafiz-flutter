@@ -7,7 +7,6 @@ import '../Services/ClientService.dart';
 import '../Services/SettingsRef.dart';
 
 class LoginController extends GetxController {
-  //Rx<UserModel> userModel = UserModel().obs;
   var userModel = UserModel().obs;
 
   void userModelUpdated() => userModel.refresh();
@@ -23,6 +22,7 @@ class LoginController extends GetxController {
       val?.token = value;
       val?.isSigned = true;
     });
+
   }
 
   set LoggedInd(bool sign) {

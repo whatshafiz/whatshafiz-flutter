@@ -2,6 +2,358 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:whatshafiz/Auth/HomeController.dart';
+
+import '../Models/Countries.dart';
+import '../Models/ProfileModel.dart';
+import '../Services/ClientService.dart';
+import '../authscreens/Home.dart';
+import '../constants/Constants.dart';
+import '../constants/Util.dart';
+
+class HomeView extends GetWidget<HomeController> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    context = context;
+    Size size = getWindowSize(context);
+
+    return GetBuilder<HomeController>(
+      builder: (controller) => Scaffold(
+        appBar: AppBar(
+          toolbarHeight: size.height * 0.15,
+          leadingWidth: 100,
+          backgroundColor: Colors.black87,
+          title: Text(
+            "WhatHafız .",
+            style: GoogleFonts.poppins().copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 22,
+                fontStyle: FontStyle.normal),
+          ),
+          leading: Center(
+            child: InkWell(
+                onTap: () {
+                  if (controller.showPasswordFields) {
+                    controller.resetForm();
+                  }
+                },
+                child: const Icon(Icons.arrow_back)),
+          ),
+        ),
+        body: Center(
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    width: size.width * 0.5,
+                    margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+                    decoration: BoxDecoration(
+                      color: Colors.black87,
+                      border: Border.all(width: 1, color: Colors.black54),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                      margin: const EdgeInsets.all(30),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Visibility(
+                            visible: !controller.showPasswordFields,
+                            child: DropdownSearch<Countries>(
+                              popupProps: const PopupProps.menu(
+                                showSelectedItems: false,
+                                showSearchBox: true,
+                              ),
+                              items: controller.counties,
+                              itemAsString: (item) =>
+                                  "(+${item.phoneCode}) ${item.name}",
+                              dropdownDecoratorProps:
+                                  const DropDownDecoratorProps(
+                                dropdownSearchDecoration: InputDecoration(
+                                  labelText: "Ülke Kodu",
+                                  hintText:
+                                      "Ülkenize ait telefon kodunu seçiniz...",
+                                ),
+                              ),
+                              onChanged: (item) {
+                                controller.selectedCountryPhoneCode =
+                                    item?.phoneCode;
+                              },
+                              selectedItem: controller.counties.first,
+                            ),
+                          ),
+                          Visibility(
+                            visible: !controller.showPasswordFields,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  top: 20, left: 10, right: 10),
+                              child: TextFormField(
+                                validator: (txt) {
+                                  if (txt == null) return null;
+                                  if (txt.length < 4)
+                                    return "Telefon numarası hatalı veya eksik";
+                                  return null;
+                                },
+                                onSaved: (txt) {
+                                  if (txt != null) {
+                                    controller.phoneNumber = txt!;
+                                  }
+                                },
+                                keyboardType: TextInputType.phone,
+                                decoration: const InputDecoration(
+                                  labelText: "Telefon numaranızı giriniz.",
+                                  hintText:
+                                      "Telefon numarası alan kodu olmadan giriniz.",
+                                  labelStyle: TextStyle(color: Colors.white),
+                                ),
+                                style: TextStyle(
+                                    fontFamily:
+                                        GoogleFonts.poppins().fontFamily,
+                                    fontSize: 14,
+                                    color: Colors.white),
+                              ),
+                            ),
+                          ),
+                          !controller.firstLogin
+                              ? Visibility(
+                                  visible: controller.showPasswordFields,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 20, left: 10, right: 10),
+                                        child: TextFormField(
+                                          validator: (t) => validatePsw(t),
+                                          onSaved: (t) {
+                                            controller.password = t!;
+                                          },
+                                          obscureText: true,
+                                          keyboardType: TextInputType.phone,
+                                          decoration: const InputDecoration(
+                                            labelText: "Parola giriniz.",
+                                            hintText: "Bir parola giriniz.",
+                                            labelStyle:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          style: TextStyle(
+                                              fontFamily: GoogleFonts.poppins()
+                                                  .fontFamily,
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 20, left: 10, right: 10),
+                                          child: controller.forgetIsOpen
+                                              ? TextButton(
+                                                  onPressed: () =>
+                                                      controller.wpMsgSend(),
+                                                  child: Text(
+                                                    "Şifremi Unuttum",
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.blue,
+                                                        fontFamily: GoogleFonts
+                                                                .poppins()
+                                                            .fontFamily),
+                                                  ),
+                                                )
+                                              : Text(
+                                                  "Şifremi unuttum hizmeti kısa süre için kapalıdır.",
+                                                  style: GoogleFonts.poppins()
+                                                      .copyWith(
+                                                          fontSize: 12,
+                                                          color: Colors.grey),
+                                                ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : Visibility(
+                                  visible: controller.showPasswordFields,
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 20, left: 10, right: 10),
+                                        child: TextFormField(
+                                          validator: (t) => validatePsw(t),
+                                          onSaved: (t) {
+                                            controller.password = t!;
+                                          },
+                                          obscureText: true,
+                                          keyboardType: TextInputType.phone,
+                                          decoration: const InputDecoration(
+                                            labelText: "Parola giriniz.",
+                                            hintText: "Bir parola giriniz.",
+                                            labelStyle:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          style: TextStyle(
+                                              fontFamily: GoogleFonts.poppins()
+                                                  .fontFamily,
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 20, left: 10, right: 10),
+                                        child: TextFormField(
+                                          validator: (t) => validatePsw(t),
+                                          onSaved: (t) {
+                                            print("paswword confirm");
+                                            controller.passwordConfirmation =
+                                                t!;
+                                          },
+                                          obscureText: true,
+                                          keyboardType: TextInputType.phone,
+                                          decoration: const InputDecoration(
+                                            labelText:
+                                                "Parola tekrarı giriniz.",
+                                            hintText: "Parola tekrarı giriniz.",
+                                            labelStyle:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          style: TextStyle(
+                                              fontFamily: GoogleFonts.poppins()
+                                                  .fontFamily,
+                                              fontSize: 14,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                      Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 20, left: 10, right: 10),
+                                          child: controller.forgetIsOpen
+                                              ? TextButton(
+                                                  onPressed: () =>
+                                                      controller.wpMsgSend(),
+                                                  child: Text(
+                                                    "Şifremi Unuttum",
+                                                    style: TextStyle(
+                                                        fontSize: 12,
+                                                        color: Colors.blue,
+                                                        fontFamily: GoogleFonts
+                                                                .poppins()
+                                                            .fontFamily),
+                                                  ),
+                                                )
+                                              : Visibility(
+                                                  visible:
+                                                      !controller.firstLogin,
+                                                  child: Text(
+                                                    "Şifremi unuttum hizmeti kısa süre için kapalıdır.",
+                                                    style: GoogleFonts.poppins()
+                                                        .copyWith(
+                                                            fontSize: 12,
+                                                            color: Colors.grey),
+                                                  ),
+                                                ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                          Container(
+                            alignment: Alignment.topRight,
+                            child: Padding(
+                              padding: const EdgeInsets.only(top: 20),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: Colors.blue),
+                                onPressed: () async {
+                                  if (controller.showPasswordFields &&
+                                      !controller.firstLogin) {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      controller
+                                          .loginWithPswAndPhone(); //login yapılıyor.
+                                    }
+                                  } else if (controller.firstLogin) {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      controller.registerToApp();
+                                    }
+                                  } else {
+                                    if (_formKey.currentState!.validate()) {
+                                      _formKey.currentState!.save();
+                                      controller.userCheck();
+                                    }
+                                  }
+                                },
+                                child: Text(
+                                  !controller.showPasswordFields
+                                      ? "İleri"
+                                      : "Giriş Yap",
+                                  style: GoogleFonts.poppins().copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  validatePhone(String? text) {
+    if (text == null) return null;
+    if (text.length < 6 && text.isNotEmpty) return "Telefon boş veya geçersiz!";
+    return null;
+  }
+
+  getProfile(String token) async {
+    var clientService = ClientService();
+    final responseProfile =
+        await clientService.getWithToken(PROFILEURL, token, {});
+    if (responseProfile != null) {
+      final profileResponse = ProfileModel.fromJson(responseProfile);
+      if (profileResponse.user != null) {
+        if (profileResponse.user!.phoneNumberVerifiedAt == null) {
+          await yesNoDialog(
+              Get.context as BuildContext,
+              "",
+              "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
+              "WhatsApp Kody Gönder",
+              "Vazgeç",
+              () => controller.sendCodeAuth(token));
+        } else {
+          //Get.toNamed(LANDING);
+          //loginController?.userModel.value.isSigned=true;
+        }
+      }
+    }
+  }
+}
+/*
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:whatshafiz/Helper/AppRoutes.dart';
 
 import '../Controllers/LoginController.dart';
 import '../Models/Countries.dart';
@@ -526,7 +878,7 @@ class _HomeViewState extends State<HomeView> {
           if (wpMsg.message! == "Telefon No daha önce doğrulanmış") {
             informUser(context, "", wpMsg.message!);
           } else {
-            Get.toNamed(CODEANDPSW, arguments: {"token": phoneNum});
+            Get.toNamed(AppRoutes.CODEANDPSW, arguments: {"token": phoneNum});
           }
         }
       }
@@ -539,9 +891,11 @@ class _HomeViewState extends State<HomeView> {
       final wpMsg = WpSendCodeModel.fromJson(client);
       if (wpMsg.message != null) {
         if (wpMsg.message!.isNotEmpty) {
-          Get.toNamed(CODEAUTH, arguments: {"token": token});
+          Get.toNamed(AppRoutes.CODEAUTH, arguments: {"token": token});
         }
       }
     }
   }
 }
+
+ */
