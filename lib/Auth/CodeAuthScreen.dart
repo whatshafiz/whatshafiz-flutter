@@ -18,6 +18,8 @@ class CodeAuthScreen extends StatelessWidget {
 
   final GlobalKey<FormState> codeForm = GlobalKey<FormState>();
 
+  CodeAuthScreen({super.key});
+
   validateField(String? txt) {
     if (txt == null) return null;
     if (txt.isEmpty) return TranslationKeys.kodgirilmedi.tr;

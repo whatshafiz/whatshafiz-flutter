@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:whatshafiz/Components/SingleAppBar.dart';
+import 'package:whatshafiz/Controllers/LandingController.dart';
 
 import '../Components/MAppBar.dart';
 import '../Controllers/LoginController.dart';
 import '../authscreens/BaseWidget.dart';
 
-class LandingScreen extends StatelessWidget with BaseWidget {
-  const LandingScreen({Key? key}) : super(key: key);
+class LandingScreen extends GetWidget<LandingController> {
+  LandingScreen({Key? key}) : super(key: key);
+  final loginController = Get.find<LoginController>();
 
   @override
   Widget build(BuildContext context) {
-    final loginController = Get.find<LoginController>();
     return Scaffold(
-      appBar: MAppBar(
-        menuSelected: MenuSelected,
+      appBar: SingleAppBar(
+        label: "WhatHafız .",
       ),
       body: Column(children: [
         Obx(

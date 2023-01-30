@@ -71,28 +71,6 @@ class LoginController extends GetxController {
     });
   }
 
-  /*getProfile(String token) async {
-    var clientService = ClientService();
-    final responseProfile =
-    await clientService.getWithToken(PROFILEURL, token, {});
-    if (responseProfile != null) {
-      final profileResponse = ProfileModel.fromJson(responseProfile);
-      if (profileResponse.user != null) {
-        if (profileResponse.user!.phoneNumberVerifiedAt == null) {
-          await yesNoDialog(
-              Get.context as BuildContext,
-              "",
-              "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
-              "WhatsApp Kody Gönder",
-              "Vazgeç",
-                  () => controller.sendCodeAuth(token));
-        } else {
-          //Get.toNamed(LANDING);
-          //loginController?.userModel.value.isSigned=true;
-        }
-      }
-    }
-  }*/
 
   Future<void> readAll() async {
     var settings = await SettingsRef().getUserProps();

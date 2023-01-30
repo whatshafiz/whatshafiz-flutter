@@ -18,7 +18,7 @@ class AppPages {
           : HomeView()),
     ),
     GetPage(name: AppRoutes.LOGOUT, page: () => const LogoutScreen()),
-    GetPage(name: AppRoutes.LANDING, page: () => const LandingScreen()),
+    GetPage(name: AppRoutes.LANDING, page: () => LandingScreen()),
     GetPage(name: AppRoutes.REGISTER, page: () => RegisterScreen()),
     GetPage(
         name: AppRoutes.PHONEREGISTER, page: () => RegisterWithPhoneScreen()),

@@ -13,9 +13,9 @@ void main() async {
     themeMode: ThemeMode.dark,
     initialBinding: Binding(),
     translations: AppTranslator(),
-    //translate
     translationsKeys: AppTranslator().keys,
     locale: Get.deviceLocale,
+    getPages: AppPages.pages,
     theme: ThemeData(
       brightness: Brightness.dark,
       canvasColor: Colors.transparent,
@@ -28,6 +28,5 @@ void main() async {
         bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
       ),
     ),
-    getPages: AppPages.pages,
   ));
 }
