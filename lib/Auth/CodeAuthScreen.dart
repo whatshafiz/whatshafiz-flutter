@@ -12,74 +12,11 @@ import '../constants/Constants.dart';
 
 import '../Models/WpSendCodeModel.dart';
 
-
 class CodeAuthScreen extends StatelessWidget {
   final CodeAuthScreenController controller =
       Get.find<CodeAuthScreenController>();
 
   final GlobalKey<FormState> codeForm = GlobalKey<FormState>();
-
-  /*final TIMETOWAIT = 180 * 1000;
-  int counter = 0;
-  String timeDisplayer = "00:00";
-  String btnText = "";
-  String mToken = "";
-
-  TextEditingController codeController = TextEditingController();
-  final GlobalKey<FormState> codeForm = GlobalKey<FormState>();
-  final stopwatch = Stopwatch();
-  bool timeEnded = false;
-  LoginController? loginController;
-  Timer? timer;
-
-  startTimer() {
-    counter = TIMETOWAIT ~/ 1000;
-
-    Timer.periodic(const Duration(seconds: 1), (timer) {
-      this.timer = timer;
-      timerTick();
-      if (stopwatch.elapsedMilliseconds >= TIMETOWAIT) {
-        timer.cancel();
-        stopwatch.reset();
-        setState(() {
-          timeEnded = true;
-          btnText = "Kodu tekrar gönder";
-        });
-      }
-    });
-    stopwatch.start();
-    setState(() {
-      btnText = "Onayla";
-    });
-  }
-
-  timerTick() {
-    counter--;
-    if (counter <= 0) counter = 0;
-    final formatted = formatTimer(counter);
-    setState(() {
-      timeDisplayer = formatted;
-    });
-  }
-
-  formatTimer(int cnt) {
-    int minute = cnt ~/ 60;
-    int sec = cnt % 60;
-    String formatted = "";
-    if (minute < 10 && sec < 10) {
-      formatted = "0$minute:0$sec";
-    } else if (minute < 10) {
-      formatted = "0$minute:$sec";
-    } else if (sec < 10) {
-      formatted = "$minute:0$sec";
-    } else {
-      formatted = "$minute:$sec";
-    }
-    return formatted;
-  }*/
-
-
-
 
   validateField(String? txt) {
     if (txt == null) return null;
@@ -91,7 +28,7 @@ class CodeAuthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     if (Get.arguments != null) {
       final token = Get.arguments["token"];
-      controller?.setToken = token;
+      controller.setToken = token;
     }
     Size size = getWindowSize(context);
     return Scaffold(
@@ -109,9 +46,9 @@ class CodeAuthScreen extends StatelessWidget {
           leading: Center(
             child: InkWell(
                 onTap: () {
-                  if (controller?.timer != null) {
-                    controller?.timer!.cancel();
-                    controller?.stopwatch.stop();
+                  if (controller.timer != null) {
+                    controller.timer!.cancel();
+                    controller.stopwatch.stop();
                   }
                   Get.back();
                 },

@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:whatshafiz/Auth/HomeController.dart';
+import 'package:whatshafiz/Controllers/HomeController.dart';
 import 'package:whatshafiz/Controllers/CodeWithNewPasswordController.dart';
 import 'package:whatshafiz/Controllers/LoginController.dart';
 

@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
+import '../Auth/CodeAuthScreen.dart';
+import '../Auth/CodeWithNewPassword.dart';
 import '../Auth/HomeView.dart';
 import '../Controllers/LoginController.dart';
 import '../Landing/Landing.dart';
 import '../Landing/Logout.dart';
-import '../authscreens/CodeAuthScreen.dart';
-import '../authscreens/CodeWithNewPassword.dart';
 import '../authscreens/RegisterScreen.dart';
 import '../authscreens/RegisterWithPhoneScreen.dart';
 import 'AppRoutes.dart';

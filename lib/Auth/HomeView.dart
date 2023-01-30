@@ -2,7 +2,7 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Auth/HomeController.dart';
+import 'package:whatshafiz/Controllers/HomeController.dart';
 import 'package:whatshafiz/Controllers/AppTranslator.dart';
 import '../Models/Countries.dart';
 import '../authscreens/Home.dart';
@@ -92,9 +92,10 @@ class HomeView extends GetWidget<HomeController> {
                               child: TextFormField(
                                 validator: (txt) {
                                   if (txt == null) return null;
-                                  if (txt.length < 4)
+                                  if (txt.length < 4) {
                                     return TranslationKeys
                                         .telefonnohataliveyaeksik.tr;
+                                  }
                                   return null;
                                 },
                                 onSaved: (txt) {
@@ -108,7 +109,7 @@ class HomeView extends GetWidget<HomeController> {
                                       TranslationKeys.telefonnumarasigiriniz.tr,
                                   hintText: TranslationKeys
                                       .telefonnoalankoduolmadangiriniz.tr,
-                                  labelStyle: TextStyle(color: Colors.white),
+                                  labelStyle: const TextStyle(color: Colors.white),
                                 ),
                                 style: TextStyle(
                                     fontFamily:
@@ -261,7 +262,8 @@ class HomeView extends GetWidget<HomeController> {
                                                       !controller.firstLogin,
                                                   child: Text(
                                                     TranslationKeys
-                                                        .sifremiunuttumkapali.tr,
+                                                        .sifremiunuttumkapali
+                                                        .tr,
                                                     style: GoogleFonts.poppins()
                                                         .copyWith(
                                                             fontSize: 12,
