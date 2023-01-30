@@ -14,13 +14,25 @@ class LoginController extends GetxController {
 
   static LoginController get Shared => Get.find<LoginController>();
 
+  checkUserSigned() async {
+    var checkUserIsLogged = await SettingsRef().Token;
+    print("====> user logged in before $checkUserIsLogged");
+    if (checkUserIsLogged != null) {
+      userModel.value.token = checkUserIsLogged!;
+      userModel.value.isSigned = true;
+      update();
+    }
+  }
+
   LoginController() {
     super.onInit();
+    checkUserSigned();
   }
 
   set SetToken(String value) {
     userModel.update((val) {
       val?.token = value;
+      SettingsRef().saveToken(value);
       val?.isSigned = true;
     });
   }
@@ -49,6 +61,7 @@ class LoginController extends GetxController {
   }
 
   Future<void> signOut() async {
+    SettingsRef().removeToken();
     userModel.update((val) {
       val?.profile = null;
       val?.token = null;

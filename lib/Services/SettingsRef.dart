@@ -7,9 +7,26 @@ class SettingsRef {
   String USEREMAIL = "USEREMAIL";
   String USERPASSWROD = "USERPASSWROD";
   String USERTOKEN = "USERTOKEN";
+  String? _token;
 
   Future<SharedPreferences> _shared() async {
     return await SharedPreferences.getInstance();
+  }
+
+  Future<void> removeToken() async {
+    final prefs = await _shared();
+    prefs.remove(USERTOKEN);
+  }
+
+  Future<void> saveToken(String token) async {
+    final prefs = await _shared();
+    prefs.setString(USERTOKEN, token);
+  }
+
+  Future<String?> get Token async {
+    final prefs = await _shared();
+    _token = prefs.getString(USERTOKEN);
+    return _token;
   }
 
   Future<bool> saveUserProps(
@@ -28,8 +45,6 @@ class SettingsRef {
     final String? token = prefs.getString(USERTOKEN);
 
     return UserModel(userEmail: userEmail, userPassword: userPas, token: token);
-
-    //final List<String>? items = prefs.getStringList('items');
   }
 
   Future<bool> clearUserProps() async {
@@ -37,7 +52,6 @@ class SettingsRef {
     await prefs.remove(USERTOKEN);
     await prefs.remove(USEREMAIL);
     await prefs.remove(USERPASSWROD);
-
     return true;
   }
 }

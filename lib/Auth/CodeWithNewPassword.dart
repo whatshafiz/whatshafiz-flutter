@@ -1,13 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../Controllers/LoginController.dart';
-import '../Helper/AppRoutes.dart';
-import '../Models/CodeUpdateModel.dart';
-import '../Services/ClientService.dart';
-import '../constants/Util.dart';
-
+import 'package:whatshafiz/Controllers/AppTranslator.dart';
+import 'package:whatshafiz/Controllers/CodeWithNewPasswordController.dart';
 import '../constants/Constants.dart';
 
 class CodeWithNewPassword extends StatefulWidget {
@@ -18,59 +13,17 @@ class CodeWithNewPassword extends StatefulWidget {
 }
 
 class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
-  GlobalKey<FormState> formKey = GlobalKey();
-  TextEditingController codeEditController = TextEditingController();
-  TextEditingController pswEditController = TextEditingController();
-  TextEditingController pswRetypeEditController = TextEditingController();
-  String? phoneNumber;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  CodeWithNewPasswordController controller =
+      Get.find<CodeWithNewPasswordController>();
 
   @override
   initState() {
     super.initState();
-
     if (Get.arguments != null) {
       final phoneNum = Get.arguments["token"];
-      setState(() {
-        this.phoneNumber = phoneNum;
-      });
-    }
-  }
-
-  registerToApp() async {
-    if (formKey.currentState == null) return;
-    if (formKey.currentState!.validate()) {
-      String code = codeEditController.text;
-      String psw = pswEditController.text;
-      String pswRetype = pswRetypeEditController.text;
-      if (psw == pswRetype) {
-        var map = {
-          "verification_code": code,
-          "password": psw,
-          "password_confirmation": pswRetype,
-          "phone_number": phoneNumber
-        };
-
-        var response = await ClientService()
-            .PostMeApplicationJSonWithAccept(UPDATEPASSWORDRUL, map);
-        if (response != null) {
-          final codeModel = CodeUpdateModel.fromJson(response);
-          print("===> ${response}");
-          if (codeModel.errors == null) {
-            if (codeModel.message ==
-                "Kod hatalı veya süresi dolmuş, lütfen tekrar deneyin.") {
-              informUser(context, "", codeModel.message!);
-              return;
-            }
-            askUser(context, "",
-                "Başarıyla şifreniz değiştirildi. Şimdi Girişe yönlendiriliyorsunuz.",
-                () {
-              Get.toNamed(AppRoutes.HOME);
-            });
-          } else {
-            informUser(context, "", codeModel.message!);
-          }
-        }
-      }
+      controller.PhoneNumber = phoneNum;
     }
   }
 
@@ -108,7 +61,7 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
                 Container(
                   margin: EdgeInsets.only(top: 20, left: 10, right: 10),
                   child: Text(
-                    "Lütfen gelen mesajı spam değil olarak işaretleyiniz.",
+                    TranslationKeys.spandegilolarakisaretle.tr,
                     style: GoogleFonts.poppins()
                         .copyWith(fontSize: 14, color: Colors.white),
                   ),
@@ -116,29 +69,47 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: TextFormField(
-                    controller: codeEditController,
-                    decoration: const InputDecoration(
-                        labelText: "doğrulama kodu",
-                        hintText: "doğrulama kodu"),
+                    validator: (t) {
+                      if (t == null) return null;
+                      if (t.isEmpty || t.length < 4)
+                        return TranslationKeys.dogrulamakoduhataliveyaeksik.tr;
+                      return null;
+                    },
+                    onSaved: (t) => controller.code = t,
+                    decoration: InputDecoration(
+                        labelText: TranslationKeys.dogrulamakodu.tr,
+                        hintText: TranslationKeys.dogrulamakodu.tr),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: TextFormField(
-                    controller: pswEditController,
+                    validator: (t) {
+                      if (t == null) return null;
+                      if (t.length < 5) return TranslationKeys.parolahatali.tr;
+                      return null;
+                    },
+                    onSaved: (t) => controller.confirmation = t,
                     obscureText: true,
-                    decoration: const InputDecoration(
-                        labelText: "Parola", hintText: "Parola giriniz."),
+                    decoration: InputDecoration(
+                        labelText: TranslationKeys.parolagiriniz.tr,
+                        hintText: TranslationKeys.parolagiriniz.tr),
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: TextFormField(
-                    controller: pswRetypeEditController,
+                    validator: (t) {
+                      if (t == null) return null;
+                      if (t.length < 5)
+                        return TranslationKeys.parolatekrarihatali.tr;
+                      return null;
+                    },
+                    onSaved: (t) => controller.password = t,
                     obscureText: true,
-                    decoration: const InputDecoration(
-                        labelText: "Parola tekrarı",
-                        hintText: "Parolanızı tekrar giriniz."),
+                    decoration: InputDecoration(
+                        labelText: TranslationKeys.parolatekrari.tr,
+                        hintText: TranslationKeys.parolatekrari.tr),
                   ),
                 ),
                 Container(
@@ -148,9 +119,14 @@ class _CodeWithNewPasswordState extends State<CodeWithNewPassword> {
                   child: ElevatedButton(
                     style:
                         ElevatedButton.styleFrom(backgroundColor: Colors.green),
-                    onPressed: registerToApp,
+                    onPressed: (){
+                      if(formKey.currentState!.validate()){
+                        formKey.currentState!.save();
+                        controller.registerToApp();
+                      }
+                    },
                     child: Text(
-                      "Şifre Değiştir",
+                      TranslationKeys.sifredegistir.tr,
                       style: GoogleFonts.poppins()
                           .copyWith(color: Colors.white, fontSize: 15),
                     ),
