@@ -16,11 +16,13 @@ class LoginController extends GetxController {
 
   checkUserSigned() async {
     var checkUserIsLogged = await SettingsRef().Token;
-    print("====> user logged in before $checkUserIsLogged");
     if (checkUserIsLogged != null) {
       userModel.value.token = checkUserIsLogged!;
       userModel.value.isSigned = true;
-      update();
+      userModel.update((val) {
+        val?.token = checkUserIsLogged;
+        val?.isSigned = true;
+      });
     }
   }
 
@@ -47,6 +49,13 @@ class LoginController extends GetxController {
     return userModel.value.token;
   }
 
+  set UpdateProfile(Profile? profile) {
+    userModel.update((val) {
+      val?.profile = profile;
+    });
+
+  }
+
   Future<LoginModel> loginUser(Map<String, dynamic> uservals) async {
     ClientService service = ClientService();
     final data = await service.PostMeWith(uservals);
@@ -70,7 +79,6 @@ class LoginController extends GetxController {
       val?.isSigned = false;
     });
   }
-
 
   Future<void> readAll() async {
     var settings = await SettingsRef().getUserProps();

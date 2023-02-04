@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:whatshafiz/Controllers/AppTranslator.dart';
+import 'package:whatshafiz/Models/LoginModel.dart';
 import 'LoginController.dart';
 import '../Helper/AppRoutes.dart';
 import '../Models/Countries.dart';
@@ -82,7 +83,7 @@ class HomeController extends GetxController {
 
   void settingCheck(String? token) async {
     if (token != null) {
-      var responseSettings = await client.getWithToken(SETTINGSURL, token, {});
+      var responseSettings = await client.GetWithToken(SETTINGSURL, token, {});
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -161,7 +162,7 @@ class HomeController extends GetxController {
   void checkSettings(String? token) async {
     if (token != null) {
       var responseSettings =
-          await client.getWithToken(SETTINGSURL, token, EmptyMap);
+          await client.GetWithToken(SETTINGSURL, token, EmptyMap);
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -208,12 +209,13 @@ class HomeController extends GetxController {
         "password": password,
       };
       final response = await client.PostMeApplicationJSon(LOGINURL, map);
-      final responseModel = RegisterCheckModel.fromJson(response);
+      final responseModel = LoginModel.fromJson(response);
 
       if (responseModel.token != null) {
         userToken = responseModel.token!;
         showPasswordFields = false;
         LoginController.Shared.SetToken = responseModel.token!;
+        LoginController.Shared.UpdateProfile=responseModel.profile;
       }
     }
   }

@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:whatshafiz/Landing/ProfileScreen.dart';
 import '../Auth/CodeAuthScreen.dart';
 import '../Auth/CodeWithNewPassword.dart';
 import '../Auth/HomeView.dart';
@@ -25,5 +26,6 @@ class AppPages {
     GetPage(name: AppRoutes.CODEAUTH, page: () => CodeAuthScreen()),
     GetPage(
         name: AppRoutes.CODEANDPSW, page: () => const CodeWithNewPassword()),
+    GetPage(name: AppRoutes.PROFILE, page: () => ProfileScreen()),
   ];
 }

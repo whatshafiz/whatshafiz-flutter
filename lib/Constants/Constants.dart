@@ -1,11 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-
 Size getWindowSize(BuildContext context) => MediaQuery.of(context).size;
-
-
-
-
 
 const ENDPOINT = "https://api.whatshafiz.com/api/v1/";
 const HAFIZKALURL = "regulations/hafizkal";
@@ -21,3 +16,12 @@ const WEBURL = "https://whatshafiz.com";
 const UPDATEPASSWORDRUL = "update-password";
 const FORGETPASSWORDURL = "forgot-password";
 const LOGINURL = "login";
+const UNIVERSITIESURL = "universities";
+
+
+CITYURL(int id) => "countries/$id/cities";
+
+FACULTYURL(int id) => "universities/$id/faculties";///universities/234/faculties/
+
+DEPARTMENTURL(int uniid, int facultyid) =>
+    "universities/$uniid/faculties/$facultyid/departments";

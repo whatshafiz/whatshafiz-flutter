@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:whatshafiz/Controllers/AppTranslator.dart';
 import 'package:whatshafiz/Controllers/LoginController.dart';
-
 import '../Constants/Constants.dart';
 import '../Constants/Util.dart';
 import '../Helper/AppRoutes.dart';
-import '../Landing/ProfileScreen.dart';
 import '../Models/ProfileModel.dart';
 import '../Models/WpSendCodeModel.dart';
 import '../Services/ClientService.dart';
@@ -35,33 +34,40 @@ class LandingController extends GetxController {
   getProfile() async {
     final token = LoginController.Shared.GetToken;
     final responseProfile =
-        await clientService.getWithToken(PROFILEURL, token, {});
+        await clientService.GetWithToken(PROFILEURL, token, {});
     if (responseProfile != null) {
       final profileResponse = ProfileModel.fromJson(responseProfile);
+      print(
+          "===> profile ${profileResponse.user?.name} ${profileResponse.user?.surname} ${profileResponse.user?.email}");
       if (profileResponse.user != null) {
         if (profileResponse.user!.phoneNumberVerifiedAt == null) {
           await yesNoDialog(
               Get.context as BuildContext,
               "",
-              "Telefon numaranıza WhatsApp üzerinden doğrulama kodu gönderilecektir.",
-              "WhatsApp Kody Gönder",
-              "Vazgeç",
+              TranslationKeys.telefonnowpuzerindedogrulamakodugonderilecek.tr,
+              TranslationKeys.wpkodugonder.tr,
+              TranslationKeys.vazgec.tr,
               () => sendCodeAuth(token));
         } else {
           if (profileResponse.user!.gender == null ||
               profileResponse.user!.gender == "") {
-            Get.offAll(const ProfileScreen());
+            LoginController.Shared.UpdateProfile = profileResponse.toProfile;
+            Get.offNamed(AppRoutes.PROFILE);
           } else {
             //type alanına göre yönlendirme denilmiş ama api'de falan yok
             //burası büyük ihtimalle girişteki alanlarla alakalı bir durum olabilir.
             //veya burası için bence type alanı seçilimi ve sonrasında aksiyon daha iyi
             //olabilir.
+            LoginController.Shared.UpdateProfile = profileResponse.toProfile;
 
+            //Get.offNamed(AppRoutes.PROFILE);
           }
-          //Get.toNamed(LANDING);
-          //loginController?.userModel.value.isSigned=true;
         }
+      } else {
+        LoginController.Shared.signOut();
       }
+    } else {
+      LoginController.Shared.signOut();
     }
   }
 }

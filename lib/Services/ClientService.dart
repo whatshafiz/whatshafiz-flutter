@@ -5,7 +5,43 @@ import '../constants/Constants.dart';
 class ClientService {
   ClientService();
 
-  Future<WhatsArapModel> getWhatsArapModel() async {
+  Future<dynamic> PutWithToken(
+      String url, String bearer, Map<String, dynamic> map) async {
+    var dio = Dio();
+    try {
+      final response = await dio.put("$ENDPOINT$url",
+          options: Options(headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+            "Authorization": "Bearer $bearer",
+          }),
+          data: map);
+      return response.data;
+    } on DioError catch (e) {
+      if (e.response != null) return e.response!.data;
+      return null;
+    }
+  }
+
+  Future<dynamic> PutWithTokenUrlEncoded(
+      String url, String bearer, Map<String, dynamic> map) async {
+    var dio = Dio();
+    try {
+      final response = await dio.put("$ENDPOINT$url",
+          options: Options(headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Accept": "application/json",
+            "Authorization": "Bearer $bearer",
+          }),
+          data: map);
+      return response.data;
+    } on DioError catch (e) {
+      if (e.response != null) return e.response!.data;
+      return null;
+    }
+  }
+
+  Future<WhatsArapModel> GetWhatsArapModel() async {
     var dio = Dio();
 
     final response = await dio
@@ -67,7 +103,7 @@ class ClientService {
     }
   }
 
-  Future<dynamic> getWithToken(
+  Future<dynamic> GetWithToken(
       String url, String bearer, Map<String, dynamic> map) async {
     try {
       var dio = Dio();
@@ -145,6 +181,25 @@ class ClientService {
     dio.options.contentType = Headers.jsonContentType;
     dio.options.headers.addAll(
         {"Accept": "application/json", "Content-Type": "application/json"});
+    var formData = FormData.fromMap(map);
+    try {
+      final response = await dio.post('$ENDPOINT$url', data: formData);
+      return response.data;
+    } on DioError catch (e) {
+      if (e.response != null) return e.response!.data;
+      return null;
+    }
+  }
+
+  Future<dynamic> PostMeApplicationJSonWithAccentAndToken(
+      String url, String bearer, Map<String, dynamic> map) async {
+    var dio = Dio();
+    dio.options.contentType = Headers.jsonContentType;
+    dio.options.headers.addAll({
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer $bearer",
+    });
     var formData = FormData.fromMap(map);
     try {
       final response = await dio.post('$ENDPOINT$url', data: formData);

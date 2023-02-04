@@ -17,6 +17,8 @@ class UserModel {
     this.profile = profile;
   }
 
+  get fullName => profile?.name + " " + profile?.surname;
+
   @override
   String toString() {
     // TODO: implement toString

@@ -36,14 +36,14 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
 
   @override
   getWhatsArapModel() async {
-    var wp = await ClientService().getWhatsArapModel();
+    var wp = await ClientService().GetWhatsArapModel();
     webviewController.loadContent(
         wp.text!.replaceAll("\n", "<br/>"), SourceType.html);
   }
 
   @override
   getBizKimiz() async {
-    var wp = await ClientService().getWhatsArapModel();
+    var wp = await ClientService().GetWhatsArapModel();
     webviewController.loadContent(
         wp.text!.replaceAll("\n", "<br/>"), SourceType.html);
   }
@@ -242,7 +242,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
       loginController?.SetToken = token;
       final clientService = ClientService();
       var responseSettings =
-          await clientService.getWithToken(SETTINGSURL, token, {});
+          await clientService.GetWithToken(SETTINGSURL, token, {});
 
       if (responseSettings != null) {
         var response = SettingsModel.fromJson(responseSettings);
@@ -252,7 +252,7 @@ class _HomeScreenState extends State<HomeScreen> with BaseWidget {
 
           print("==> resquesting to profile");
           final responseProfile =
-              await clientService.getWithToken(PROFILEURL, token, {});
+              await clientService.GetWithToken(PROFILEURL, token, {});
           print("client response $responseProfile");
           if (responseProfile != null) {
             final profileResponse = ProfileModel.fromJson(responseProfile);
