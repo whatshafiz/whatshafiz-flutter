@@ -1,10 +1,13 @@
+import 'package:whatshafiz/Models/LoginModel.dart';
+
 import 'User.dart';
 
 class ProfileModel {
   ProfileModel({
-      this.user, 
-      this.permissions, 
-      this.roles,});
+    this.user,
+    this.permissions,
+    this.roles,
+  });
 
   ProfileModel.fromJson(dynamic json) {
     user = json['user'] != null ? User.fromJson(json['user']) : null;
@@ -21,9 +24,29 @@ class ProfileModel {
       });
     }
   }
+
   User? user;
   List<dynamic>? permissions;
   List<dynamic>? roles;
+
+  get toProfile {
+    return Profile(
+        id: user?.id,
+        countryId: user?.countryId,
+        cityId: user?.cityId,
+        universityId: user?.universityId,
+        universityFacultyId: user?.universityFacultyId,
+        universityDepartmentId: user?.universityDepartmentId,
+        name: user?.name,
+        surname: user?.surname,
+        email: user?.email,
+        gender: user?.gender,
+        phoneNumber: user?.phoneNumber,
+        phoneNumberVerifiedAt: user?.phoneNumberVerifiedAt,
+        verificationCode: user?.verificationCode,
+        verificationCodeValidUntil: user?.verificationCodeValidUntil,
+        isBanned: user?.isBanned);
+  }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -38,5 +61,4 @@ class ProfileModel {
     }
     return map;
   }
-
 }

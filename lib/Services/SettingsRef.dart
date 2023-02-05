@@ -43,7 +43,6 @@ class SettingsRef {
     final String? userEmail = prefs.getString(USEREMAIL);
     final String? userPas = prefs.getString(USERPASSWROD);
     final String? token = prefs.getString(USERTOKEN);
-
     return UserModel(userEmail: userEmail, userPassword: userPas, token: token);
   }
 

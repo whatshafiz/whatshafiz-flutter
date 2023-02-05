@@ -8,4 +8,5 @@ class AppRoutes {
   static const CODEAUTH = "/codeauth";
   static const FORGETPSW = "/forgetpsw";
   static const CODEANDPSW = "/codeandpsw";
+  static const PROFILE = "/profile";
 }

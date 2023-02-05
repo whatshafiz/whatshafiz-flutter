@@ -1,25 +1,26 @@
 class User {
   User({
-      this.id, 
-      this.countryId, 
-      this.cityId, 
-      this.universityId, 
-      this.universityFacultyId, 
-      this.universityDepartmentId, 
-      this.name, 
-      this.surname, 
-      this.email, 
-      this.gender, 
-      this.phoneNumber, 
-      this.phoneNumberVerifiedAt, 
-      this.verificationCode, 
-      this.verificationCodeValidUntil, 
-      this.isBanned, 
-      this.country, 
-      this.city, 
-      this.university, 
-      this.universityFaculty, 
-      this.universityDepartment,});
+    this.id,
+    this.countryId,
+    this.cityId,
+    this.universityId,
+    this.universityFacultyId,
+    this.universityDepartmentId,
+    this.name,
+    this.surname,
+    this.email,
+    this.gender,
+    this.phoneNumber,
+    this.phoneNumberVerifiedAt,
+    this.verificationCode,
+    this.verificationCodeValidUntil,
+    this.isBanned,
+    this.country,
+    this.city,
+    this.university,
+    this.universityFaculty,
+    this.universityDepartment,
+  });
 
   User.fromJson(dynamic json) {
     id = json['id'];
@@ -43,6 +44,7 @@ class User {
     universityFaculty = json['university_faculty'];
     universityDepartment = json['university_department'];
   }
+
   int? id;
   dynamic countryId;
   dynamic cityId;
@@ -88,5 +90,4 @@ class User {
     map['university_department'] = universityDepartment;
     return map;
   }
-
 }

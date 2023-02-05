@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:whatshafiz/Controllers/AppTranslator.dart';
 
 import '../Utils/TapPages.dart';
 
@@ -26,7 +28,7 @@ TapPages TapPageByIndex(int num) {
   return TapPages.WhatHafiz;
 }
 
-Future<void> yesNoDialog( BuildContext context, String title, String description,
+Future<void> yesNoDialog(BuildContext context, String title, String description,
     String yesTitle, String cancelTitle, Function onResponse) async {
   // set up the buttons
   Widget cancelButton = TextButton(
@@ -49,7 +51,6 @@ Future<void> yesNoDialog( BuildContext context, String title, String description
     actions: [
       continueButton,
       cancelButton,
-
     ],
   );
 
@@ -80,7 +81,7 @@ Future<void> informUser(
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('Tamam'),
+            child: Text(TranslationKeys.tamam.tr),
             onPressed: () {
               Navigator.of(context).pop();
             },
@@ -90,8 +91,9 @@ Future<void> informUser(
     },
   );
 }
-Future<void> askUser(
-    BuildContext context, String title, String content,Function completion) async {
+
+Future<void> askUser(BuildContext context, String title, String content,
+    Function completion) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button!
@@ -108,7 +110,7 @@ Future<void> askUser(
         ),
         actions: <Widget>[
           TextButton(
-            child: const Text('Tamam'),
+            child: Text(TranslationKeys.tamam.tr),
             onPressed: () {
               Navigator.of(context).pop();
               completion();

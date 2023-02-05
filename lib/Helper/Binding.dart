@@ -10,7 +10,7 @@ class Binding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.lazyPut(() => LoginController(), fenix: true);
+    Get.put(LoginController(), permanent: true);
     Get.lazyPut(() => HomeController(), fenix: true);
     Get.lazyPut(() => CodeWithNewPasswordController(), fenix: true);
     Get.lazyPut(() => CodeAuthScreenController(), fenix: true);
