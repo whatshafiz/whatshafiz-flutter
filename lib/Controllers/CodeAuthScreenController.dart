@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
+import 'AppTranslator.dart';
+import 'LoginController.dart';
 
 import '../Constants/Constants.dart';
 import '../Models/WpSendCodeModel.dart';

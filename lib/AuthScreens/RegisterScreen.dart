@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import '../Components/MAppBar.dart';
 import '../Helper/AppRoutes.dart';
 import '../Models/WhatsArapModel.dart';
 import '../Services/ClientService.dart';
-import 'BaseWidget.dart';
 import '../constants/Constants.dart';
 import '../constants/Util.dart';
+import 'BaseWidget.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);

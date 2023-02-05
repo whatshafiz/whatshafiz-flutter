@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Controllers/CodeWithNewPasswordController.dart';
+
+import '../Controllers/AppTranslator.dart';
+import '../Controllers/CodeWithNewPasswordController.dart';
 import '../constants/Constants.dart';
 
 class CodeWithNewPassword extends StatefulWidget {

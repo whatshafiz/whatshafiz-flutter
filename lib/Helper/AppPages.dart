@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:whatshafiz/Landing/ProfileScreen.dart';
+import '../Landing/ProfileScreen.dart';
 import '../Auth/CodeAuthScreen.dart';
 import '../Auth/CodeWithNewPassword.dart';
 import '../Auth/HomeView.dart';

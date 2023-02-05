@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
-import '../Constants/Constants.dart';
+
 import '../Models/LoginModel.dart';
 import '../Models/UserModel.dart';
 import '../Services/ClientService.dart';
@@ -17,7 +15,7 @@ class LoginController extends GetxController {
   checkUserSigned() async {
     var checkUserIsLogged = await SettingsRef().Token;
     if (checkUserIsLogged != null) {
-      userModel.value.token = checkUserIsLogged!;
+      userModel.value.token = checkUserIsLogged;
       userModel.value.isSigned = true;
       userModel.update((val) {
         val?.token = checkUserIsLogged;

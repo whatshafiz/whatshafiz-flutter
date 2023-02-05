@@ -1,4 +1,4 @@
-import 'package:whatshafiz/Models/Cities.dart';
+import 'Cities.dart';
 
 class Faculties {
   Faculties({

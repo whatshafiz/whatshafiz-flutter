@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
+import 'AppTranslator.dart';
 
 import '../Constants/Constants.dart';
 import '../Constants/Util.dart';
