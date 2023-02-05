@@ -95,6 +95,9 @@ class HomeView extends GetWidget<HomeController> {
                                   if (txt.length < 4) {
                                     return TranslationKeys
                                         .telefonnohataliveyaeksik.tr;
+                                  } else if(txt.length>10) {
+                                    return TranslationKeys
+                                        .telefonno10rakamolmalidir.tr;
                                   }
                                   return null;
                                 },

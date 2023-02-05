@@ -62,6 +62,7 @@ class TranslationKeys {
       "telefonnoalankoduolmadangiriniz";
   static String telefonnumarasigiriniz = "telefonnumarasigiriniz"; //
   static String telefonnohataliveyaeksik = "telefonnohataliveyaeksik";
+  static String telefonno10rakamolmalidir = "telefonno10rakamolmalidir";
   static String telefonkoduseciniz = "telefonkoduseciniz"; //
 }
 
@@ -137,6 +138,8 @@ class AppTranslator extends Translations {
           TranslationKeys.telefonkoduseciniz: "Telefon numaranızı giriniz.",
           TranslationKeys.telefonnohataliveyaeksik:
               "Telefon numarası hatalı veya eksik",
+              TranslationKeys.telefonno10rakamolmalidir:
+              "Telefon numarası 10 rakamdan oluşmalıdır.",
           TranslationKeys.telefonkoduseciniz:
               "Ülkenize ait telefon kodunu seçiniz...",
           TranslationKeys.baninform:
