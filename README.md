@@ -1,7 +1,7 @@
 # whatshafiz
 
-flutter version: v3.3.3
-dart version: 2.18.2
+flutter version: v3.7.0
+dart version: 2.19.0
 ## Getting Started
 
 This project is a starting point for a Flutter application.
