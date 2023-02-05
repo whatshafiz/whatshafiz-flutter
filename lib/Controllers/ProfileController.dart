@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
-import 'package:whatshafiz/Helper/Enums.dart';
-import 'package:whatshafiz/Models/AddUniversityResponseModel.dart';
-import 'package:whatshafiz/Models/User.dart';
+import 'AppTranslator.dart';
+import 'LoginController.dart';
+import '../Helper/Enums.dart';
+import '../Models/AddUniversityResponseModel.dart';
+import '../Models/User.dart';
 
 import '../Models/Cities.dart';
 import '../Models/Countries.dart';

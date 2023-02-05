@@ -1,4 +1,4 @@
-import 'package:whatshafiz/Models/LoginModel.dart';
+import 'LoginModel.dart';
 
 import 'User.dart';
 

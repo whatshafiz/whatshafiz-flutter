@@ -2,10 +2,10 @@ import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Constants/Constants.dart';
-import 'package:whatshafiz/Controllers/ProfileController.dart';
-import 'package:whatshafiz/Helper/Enums.dart';
-import 'package:whatshafiz/Models/Cities.dart';
+import '../Constants/Constants.dart';
+import '../Controllers/ProfileController.dart';
+import '../Helper/Enums.dart';
+import '../Models/Cities.dart';
 
 import '../Controllers/AppTranslator.dart';
 import '../Models/Countries.dart';

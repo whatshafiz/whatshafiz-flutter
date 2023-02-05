@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
+import 'AppTranslator.dart';
+import 'LoginController.dart';
 import '../Constants/Constants.dart';
 import '../Constants/Util.dart';
 import '../Helper/AppRoutes.dart';

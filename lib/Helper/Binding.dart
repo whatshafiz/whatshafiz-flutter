@@ -1,8 +1,8 @@
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/HomeController.dart';
-import 'package:whatshafiz/Controllers/CodeWithNewPasswordController.dart';
-import 'package:whatshafiz/Controllers/LandingController.dart';
-import 'package:whatshafiz/Controllers/LoginController.dart';
+import '../Controllers/HomeController.dart';
+import '../Controllers/CodeWithNewPasswordController.dart';
+import '../Controllers/LandingController.dart';
+import '../Controllers/LoginController.dart';
 
 import '../Controllers/CodeAuthScreenController.dart';
 

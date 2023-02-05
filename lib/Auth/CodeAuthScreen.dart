@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Controllers/CodeAuthScreenController.dart';
+import '../Controllers/AppTranslator.dart';
+import '../Controllers/CodeAuthScreenController.dart';
 import '../constants/Constants.dart';
 
 class CodeAuthScreen extends StatelessWidget {

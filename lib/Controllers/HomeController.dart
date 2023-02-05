@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
-import 'package:whatshafiz/Models/LoginModel.dart';
+import 'AppTranslator.dart';
+import '../Models/LoginModel.dart';
 import 'LoginController.dart';
 import '../Helper/AppRoutes.dart';
 import '../Models/Countries.dart';
@@ -107,6 +107,7 @@ class HomeController extends GetxController {
   }
 
   sendCodeAuth(String token) async {
+    // ignore: no_leading_underscores_for_local_identifiers
     var _client = await client.PostWithToken(WPCODESEND, token, {});
     if (_client != null) {
       final wpMsg = WpSendCodeModel.fromJson(_client);
@@ -120,9 +121,9 @@ class HomeController extends GetxController {
 
   void userCheck() async {
     String? code = selectedCountryPhoneCode;
-    String? phoneNum = phoneNumber?.removeAllWhitespace;
+    String? phoneNum = phoneNumber.removeAllWhitespace;
     if (code != null) {
-      if (code.isNotEmpty && phoneNum!.isNotEmpty) {
+      if (code.isNotEmpty && phoneNum.isNotEmpty) {
         final num = "$code$phoneNum";
         currentPhoneNum = num;
         final map = {"phone_number": num};

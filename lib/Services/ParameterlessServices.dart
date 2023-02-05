@@ -1,15 +1,15 @@
-import 'package:whatshafiz/Models/AddCityResponseModel.dart';
-import 'package:whatshafiz/Models/AddDepartmentResultModel.dart';
-import 'package:whatshafiz/Models/AddFacultyResponseModel.dart';
-import 'package:whatshafiz/Models/AddUniversityResponseModel.dart';
-import 'package:whatshafiz/Models/Cities.dart';
-import 'package:whatshafiz/Models/CityModel.dart';
-import 'package:whatshafiz/Models/Countries.dart';
-import 'package:whatshafiz/Models/Department.dart';
-import 'package:whatshafiz/Models/Departments.dart';
-import 'package:whatshafiz/Models/Faculties.dart';
-import 'package:whatshafiz/Models/Faculty.dart';
-import 'package:whatshafiz/Models/Universities.dart';
+import '../Models/AddCityResponseModel.dart';
+import '../Models/AddDepartmentResultModel.dart';
+import '../Models/AddFacultyResponseModel.dart';
+import '../Models/AddUniversityResponseModel.dart';
+import '../Models/Cities.dart';
+import '../Models/CityModel.dart';
+import '../Models/Countries.dart';
+import '../Models/Department.dart';
+import '../Models/Departments.dart';
+import '../Models/Faculties.dart';
+import '../Models/Faculty.dart';
+import '../Models/Universities.dart';
 
 import '../Constants/Constants.dart';
 import '../Constants/Util.dart';

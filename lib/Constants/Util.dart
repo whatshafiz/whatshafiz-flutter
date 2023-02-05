@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:whatshafiz/Controllers/AppTranslator.dart';
+import '../Controllers/AppTranslator.dart';
 
 import '../Utils/TapPages.dart';
 
